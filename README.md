@@ -55,6 +55,19 @@
 - [👋 Community](#-community)
 - [📎 Project Info](#-project-info)
 
+<!-- Fork Notice -->
+> [!IMPORTANT]
+> This is a maintained fork of [hcloud-k8s/terraform-hcloud-kubernetes](https://github.com/hcloud-k8s/terraform-hcloud-kubernetes) used by Viorica Cosmetic. It adds one feature, `primary_ipv4_ids` on node pools (see [Primary IPv4 Addresses](#primary-ipv4-addresses)), which is also proposed upstream. Everything else is identical to the upstream release it is based on.
+
+### Fork versioning and rebase rule
+
+- Tags are named `X.Y.Z-vio.N`, with no `v` prefix. `X.Y.Z` is the upstream release the tag is based on and `N` is the revision of the fork patch on top of it (for example `6.1.0-vio.1`).
+- Consumers must pin an exact tag (`?ref=6.1.0-vio.1`), never a branch.
+- The `main` branch mirrors upstream `main` and carries no patch. The patch lives on a `vio/<feature>` branch and in the tags.
+- For every upstream release we adopt, rebase the `vio/*` branch onto the upstream tag (`git fetch upstream --tags && git rebase <X.Y.Z>`), re-run `terraform test`, then publish a new tag with `N` reset to `1` (`<X.Y.Z>-vio.1`). If only the patch changes on the same upstream release, increment `N`.
+- Tags matching `*-vio.*` are immutable: they are protected against update and deletion by a repository ruleset. A wrong tag is superseded by a new `N`, never moved.
+- Once the patch is merged and published in an upstream release, consumers switch back to the Registry module and this fork is archived.
+
 <!-- About the Project -->
 ## 🌟 About the Project
 Hcloud Kubernetes is a Terraform module for deploying a fully declarative, managed Kubernetes cluster on Hetzner Cloud. It utilizes Talos, a secure, immutable, and minimal operating system specifically designed for Kubernetes, featuring a streamlined architecture with only a handful of binaries and shared libraries. Just enough to run containerd and a small set of system services.
