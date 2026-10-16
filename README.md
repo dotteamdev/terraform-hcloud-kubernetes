@@ -57,7 +57,7 @@
 
 <!-- Fork Notice -->
 > [!IMPORTANT]
-> This is a maintained fork of [hcloud-k8s/terraform-hcloud-kubernetes](https://github.com/hcloud-k8s/terraform-hcloud-kubernetes), used for stable egress IPs whitelisted by third parties. It adds one feature, `primary_ipv4_ids` on node pools (see [Primary IPv4 Addresses](#primary-ipv4-addresses)), which is also proposed upstream. Everything else is identical to the upstream release it is based on.
+> This is a maintained fork of [hcloud-k8s/terraform-hcloud-kubernetes](https://github.com/hcloud-k8s/terraform-hcloud-kubernetes), used for stable egress IPs whitelisted by third parties. It adds `primary_ipv4_ids` on node pools (see [Primary IPv4 Addresses](#primary-ipv4-addresses)), which is also proposed upstream, and sets `ignore_remote_firewall_ids = true` on the control plane and worker servers, so firewalls attached to them through label selectors are not detached by the next apply. Everything else is identical to the upstream release it is based on.
 
 ### Fork versioning and update rule
 

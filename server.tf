@@ -54,6 +54,10 @@ resource "hcloud_server" "control_plane" {
 
   firewall_ids = [local.firewall_id]
 
+  # Firewalls attached to the server through label selectors are returned by the API in firewall_ids.
+  # Without this, every plan after such a firewall is applied shows a diff that would detach it.
+  ignore_remote_firewall_ids = true
+
   public_net {
     ipv4_enabled = var.talos_public_ipv4_enabled
     ipv4         = each.value.primary_ipv4_id
@@ -120,6 +124,10 @@ resource "hcloud_server" "worker" {
   )
 
   firewall_ids = [local.firewall_id]
+
+  # Firewalls attached to the server through label selectors are returned by the API in firewall_ids.
+  # Without this, every plan after such a firewall is applied shows a diff that would detach it.
+  ignore_remote_firewall_ids = true
 
   public_net {
     ipv4_enabled = var.talos_public_ipv4_enabled
